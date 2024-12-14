@@ -30,6 +30,7 @@ echo "Installed MySQL"
 echo "Configure MySQL Server"
 ADMIN_PASS="$(openssl rand -base64 18 | cut -c1-13)"
 mysql -uroot -p"$ADMIN_PASS" -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH $RELEASE_AUTH BY '$ADMIN_PASS'; FLUSH PRIVILEGES;"
+mysql -uroot -p"$ADMIN_PASS" -e "GRANT ALL PRIVILEGES ON * . * TO 'root'@'10.10.10.%'; FLUSH PRIVILEGES;"
 echo "" >~/mysql.creds
 echo -e "MySQL user: root" >>~/mysql.creds
 echo -e "MySQL password: $ADMIN_PASS" >>~/mysql.creds
