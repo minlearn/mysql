@@ -58,7 +58,7 @@ if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
 fi
 
 echo "Start Service"
-echo -e "[mysqld] \n bind-address = 0.0.0.0" > /etc/mysql/conf.d/bindaddress.cnf
+echo -e "[mysqld] \n bind-address = 0.0.0.0" >> /etc/mysql/my.cnf
 systemctl enable -q --now mysql
 echo "Service started"
 
