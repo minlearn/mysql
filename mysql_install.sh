@@ -14,7 +14,7 @@ RELEASE_AUTH="mysql_native_password"
 read -r -p "Would you like to install the MySQL 8.4 LTS release instead of MySQL 8.0 (bug fix track; EOL April-2026)? <y/N> " prompt
 if [[ "${prompt,,}" =~ ^(y|yes)$ ]]; then
       RELEASE_REPO="mysql-8.4-lts"
-      RELEASE_AUTH="caching_sha2_password"
+      RELEASE_AUTH="mysql_native_password"
 fi
 
 echo "Installing MySQL"
