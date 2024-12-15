@@ -9,17 +9,13 @@ apt-get install -y \
   mc
 echo "Installed Dependencies"
 
-RELEASE_REPO="mysql-8.0"
+RELEASE_REPO="mysql-5.7"
+RELEASE_LSB="buster"
 RELEASE_AUTH="mysql_native_password"
-read -r -p "Would you like to install the MySQL 8.4 LTS release instead of MySQL 8.0 (bug fix track; EOL April-2026)? <y/N> " prompt
-if [[ "${prompt,,}" =~ ^(y|yes)$ ]]; then
-      RELEASE_REPO="mysql-8.4-lts"
-      RELEASE_AUTH="mysql_native_password"
-fi
 
 echo "Installing MySQL"
 curl -fsSL https://repo.mysql.com/RPM-GPG-KEY-mysql-2023 | gpg --dearmor  -o /usr/share/keyrings/mysql.gpg
-echo "deb [signed-by=/usr/share/keyrings/mysql.gpg] http://repo.mysql.com/apt/debian $(lsb_release -sc) ${RELEASE_REPO}" >/etc/apt/sources.list.d/mysql.list
+echo "deb [signed-by=/usr/share/keyrings/mysql.gpg] http://repo.mysql.com/apt/debian ${RELEASE_LSB} ${RELEASE_REPO}" >/etc/apt/sources.list.d/mysql.list
 apt-get update
 export DEBIAN_FRONTEND=noninteractive
 apt-get install -y \

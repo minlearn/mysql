@@ -1,1 +1,1 @@
-this is the mysql lxc app res for [1kdd](https://github.com/minlearn/1kdd)
+this is the mysql57 lxc app res for [1kdd](https://github.com/minlearn/1kdd)
