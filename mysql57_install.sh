@@ -1,7 +1,9 @@
 ##############
 
+silent() { "$@" >/dev/null 2>&1; }
+
 echo "Installing Dependencies"
-apt-get install -y \
+silent apt-get install -y \
   sudo \
   lsb-release \
   curl \
@@ -16,9 +18,9 @@ RELEASE_AUTH="mysql_native_password"
 echo "Installing MySQL"
 curl -fsSL https://repo.mysql.com/RPM-GPG-KEY-mysql-2023 | gpg --dearmor  -o /usr/share/keyrings/mysql.gpg
 echo "deb [signed-by=/usr/share/keyrings/mysql.gpg] http://repo.mysql.com/apt/debian ${RELEASE_LSB} ${RELEASE_REPO}" >/etc/apt/sources.list.d/mysql.list
-apt-get update
+silent apt-get update
 export DEBIAN_FRONTEND=noninteractive
-apt-get install -y \
+silent apt-get install -y \
   mysql-community-client \
   mysql-community-server
 echo "Installed MySQL"
@@ -35,7 +37,7 @@ echo "MySQL Server configured"
 read -r -p "Would you like to add PhpMyAdmin? <y/N> " prompt
 if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
   echo "Installing phpMyAdmin"
-  apt-get install -y \
+  silent apt-get install -y \
     apache2 \
     php \
     php-mysqli \
@@ -64,8 +66,8 @@ echo "Service started"
 
 
 echo "Cleaning up"
-apt-get -y autoremove
-apt-get -y autoclean
+silent apt-get -y autoremove
+silent apt-get -y autoclean
 echo "Cleaned"
 
 ###########
